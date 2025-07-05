@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivation Experiment</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Consent Screen -->
+    <div id="consent" class="screen">
+        <div class="consent-container">
+            <h1>Welcome</h1>
+            <ul class="text-left">
+                <li>In this game, I’m going to show you some stars and special machines that can change how the stars look.</li>
+                <li>You’ll get to decide which machine we put the stars and some other things in!</li>
+                <li>When we’re done, you’ll get a sticker.</li>
+                <li>Are you ready to play?</li>
+            </ul>
+            <br><br>
+            <h2>Child's Assent</h2>
+            <p class="text-left">By clicking "I Agree to Participate" below, the child indicates that they are ready to participate in the study.</p>
+            <div class="button-group">
+                <button data-screen="decline">I Decline</button>
+                <button data-screen="participant-info">I Agree to Participate</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Participant Info Screen -->
+    <div id="participant-info" class="screen" hidden>
+        <div style="text-align: center;">
+            <h2>Participant Information</h2>
+        </div>        
+        <div class="form-container">
+            <p><strong>Participant ID</strong></p>
+            <input type="text" name="prolificId" class="form-input" placeholder="Enter Participant ID" required>
+            <p><strong>Age</strong></p>
+            <input type="number" name="age" class="form-input" placeholder="Enter number in years" required>
+            <p><strong>Sex</strong></p>
+            <input type="text" name="sex" class="form-input" placeholder="Enter F or M" required>
+            <button data-screen="experiment">Submit and Start Experiment</button>
+        </div>
+    </div>
+
+    <!-- Pre-Demo Screen -->
+    <div id="preDemo" class="screen" hidden>
+        <div class="experiment-container">
+          <br>
+          <audio id="ttsAudio" style="display:none"></audio>
+      
+          <!-- Title / instructions for the pre-demo -->
+          <div class="remaining-stars" id="preDemo-instructions">
+            <!-- JavaScript fills this -->
+          </div>
+          
+          <!-- The main content where you show your row of stars. -->
+          <div id="preDemo-content" style="text-align: center; margin: 20px 0;">
+          </div>
+          
+          <!-- Continue button -->
+          <div class="button-container">
+            <button id="preDemo-continue" class="continue-button">Continue</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- Experiment Screen -->
+    <div id="experiment" class="screen" hidden>
+        <div class="fake-cursor" id="fake-cursor" style="visibility: hidden;"></div>
+        <div class="experiment-container">
+            <br>
+            <audio id="ttsAudio" style="display:none"></audio>
+            <div id="top-outcomes-container" style="display: flex; justify-content: center; margin-bottom: 20px; margin-top: 20px;">
+                <!-- Generated dynamically -->
+            </div>
+            <div class="remaining-stars" id="instruction-text">
+                You are an elf in a magical star factory. The star factory has three machines. Each machine has three special slots that can change your stars in fun ways. <br>
+                You have 18 stars to play with, but you can only put 3 stars in each slot. Watch what happens to your stars as you try them out!
+            </div>
+            <div id="playing-text" class="remaining-stars" style="display:none;">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span class="star star-size-large star-brightness-medium">★</span>
+                    <span class="arrow">→</span>
+                    <span class="star star-size-extralarge star-brightness-brightest">★</span>
+                    <span class="star star-size-extralarge star-brightness-medium">★</span>
+                    <span class="star star-size-extralarge star-brightness-darker">★</span>
+                </div>
+                <div class="star-caption">Make the biggest star — it can be bright or dark or in-between!</div>
+            </div>            
+            <div class="remaining-stars" id="finish-text" style="display:none">
+                If you are done playing, let me know.
+            </div>
+            <br>
+            <div class="remaining-stars" id="drag-instruction">Stars left: <span id="remainingStars">18</span></div>
+            <div class="draggable-star" draggable="true" id="star">
+                <span class="star star-size-medium star-brightness-medium">★</span>
+            </div>
+            <div class="machines-container" id="machines-container">
+                <!-- renderMachines() fills this -->
+            </div>
+            <!-- "Why?" Box -->
+            <div id="why-section" class="why-section" style="display: none;">
+                <textarea id="whyText" class="why-textarea" placeholder="Why? / What did you see so far?"></textarea>
+                <button id="whySubmit" class="why-submit">Submit</button>
+            </div>
+            <br>
+            <div class="button-container">
+                <button id="exit-button" class="exit-button" style="display:none;">Exit Program</button>
+                <button id="continue-button" class="continue-button" style="display:none;">Continue</button>
+            </div>
+              <!-- Quit Experiment button *inside* the experiment screen -->
+               <button
+               id="quit-button"
+               class="quit-button"
+               onclick="saveCSV(); showScreen('thank-you');">
+               Quit Experiment
+            </button>
+        </div>
+    </div>
+
+    <!-- Thank You Screen -->
+    <div id="thank-you" style="text-align: center; padding: 50px;" hidden>
+        <h2>Well done! You have been a great elf!</h2>
+        <p>Experimenter: Please do not close the window immediately and wait for at least 3 minutes for data to be uploaded.</p>
+    </div>
+    
+    <script src="scripts/app.js"></script>
+
+</body>
+</html>
