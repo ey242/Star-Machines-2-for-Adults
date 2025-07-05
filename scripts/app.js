@@ -11,13 +11,13 @@ let currentQuestionText = "";
 
 // Question arrays for 2–trial hats and 2–trial brightness
 const hatQuestions = [
-  "Now the elf boss wants you to make a big hat (like circled). Where would you put the hat?",
-  "Now the elf boss wants you to make a small hat (like circled). Where would you put the hat?"
+  "Now the elf boss wants you to make a big hat (like circled). Where would you put the hat?\nDrag the hat to the desired slot.",
+  "Now the elf boss wants you to make a small hat (like circled). Where would you put the hat?\nDrag the hat to the desired slot."
 ];
 
 const brightnessQuestions = [
-  "Now the elf boss wants you to make a bright lightbulb (like circled). Where would you put it?",
-  "Now the elf boss wants you to make a dark lightbulb (like circled). Where would you put it?"
+  "Now the elf boss wants you to make a bright lightbulb (like circled). Where would you put it?\nDrag the lightbulb to the desired slot.",
+  "Now the elf boss wants you to make a dark lightbulb (like circled). Where would you put it?\nDrag the lightbulb to the desired slot."
 ];
 
 const finalQuestions = [
@@ -447,7 +447,7 @@ const entropySlotOutputs = { 0: [], 1: [], 2: [] };
 const slotSizeMap = {};
 
 const comprehensionQuestion = "Comprehension check: Remember the stars you made from the machines? Which machine made these stars? Click on the correct machine.";
-const smallExperimentQuestion = "Now there is a new slot on the right. The elf boss wants an extra big star for his baby. Which slot will you use?";
+const smallExperimentQuestion = "Now there is a new slot on the right. The elf boss wants an extra big star for his baby. Which slot will you use?\nDrag the star to the desired slot.";
 
 let machineLayout = '';
 let slotLayout = '';
@@ -1278,7 +1278,7 @@ function startBrightExperiment() {
   remainingStars = 1;
   renderMachines();
   document.getElementById("instruction-text").innerText =
-    "Now there is a new slot on the right. The elf boss wants the brightest star for his baby. Which slot will you use?";
+    "Now there is a new slot on the right. The elf boss wants the brightest star for his baby. Which slot will you use?\nDrag the star to the desired slot.";
   const playingText = document.getElementById("playing-text");
   playingText.style.display = "block";
   playingText.innerHTML = `
@@ -1657,21 +1657,21 @@ function saveCSV() {
   });
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const quitBtn = document.getElementById('quit-button');
-//   // hide initially
-//   quitBtn.style.display = 'none';
+document.addEventListener('DOMContentLoaded', () => {
+  const quitBtn = document.getElementById('quit-button');
+  // hide initially
+  quitBtn.style.display = 'none';
 
-//   // wire up click → save + jump to thank-you
-//   quitBtn.addEventListener('click', () => {
-//     saveCSV();
-//     showScreen('thank-you');
-//   });
+  // wire up click → save + jump to thank-you
+  quitBtn.addEventListener('click', () => {
+    saveCSV();
+    showScreen('thank-you');
+  });
 
-//   // wrap showScreen to toggle quitBtn only on the "experiment" screen
-//   const _origShow = window.showScreen;
-//   window.showScreen = function(screenId) {
-//     _origShow(screenId);
-//     quitBtn.style.display = (screenId === 'experiment') ? 'block' : 'none';
-//   };
-// });
+  // wrap showScreen to toggle quitBtn only on the "experiment" screen
+  const _origShow = window.showScreen;
+  window.showScreen = function(screenId) {
+    _origShow(screenId);
+    quitBtn.style.display = (screenId === 'experiment') ? 'block' : 'none';
+  };
+});
