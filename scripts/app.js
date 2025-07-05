@@ -21,8 +21,8 @@ const brightnessQuestions = [
 ];
 
 const finalQuestions = [
-  "Now the elf boss wants you to make things bigger. Which machine would you keep?",
-  "Now the elf boss wants to make things brighter. Which machine would you keep?"
+  "Now the elf boss wants you to make things bigger. Which machine would you keep? Click on the machine.",
+  "Now the elf boss wants to make things brighter. Which machine would you keep? Click on the machine."
 ];
 
 // --- NEW GLOBAL VARIABLES FOR DEMO STAR DISTRIBUTION PER MACHINE ---
@@ -109,7 +109,7 @@ function showPreDemoPage() {
 
 function displayPreDemoColor(container) {
   const title = document.createElement("h2");
-  title.innerText = "Look at these stars!\nWhich one is the darkest? Second darkest?\nWhich one is the brightest? Second brightest?";
+  title.innerText = "Look at these stars!\nObserve the range of brightness and then hit the Continue button.";
 
   // Create a row with three stars (all medium size) in three different colors.
   const starRow = document.createElement("div");
@@ -173,7 +173,7 @@ function displayPreDemoColor(container) {
 
 function displayPreDemoSize(container) {
   const title = document.createElement("h2");
-  title.innerText = "Look at these stars!\nCan you show me which one is the biggest? Second biggest?\nWhich one is the smallest? Second smallest?";
+  title.innerText = "Look at these stars!\nObserve the range of size and then hit the Continue button.";
 
   // Create a row with three stars (all the same color, here medium) but different sizes.
   const starRow = document.createElement("div");
@@ -446,7 +446,7 @@ const entropyFirstRound = { "Shade Machine": [true, true, true] };
 const entropySlotOutputs = { 0: [], 1: [], 2: [] };
 const slotSizeMap = {};
 
-const comprehensionQuestion = "Remember the stars you made from the machines? Which machine made these stars?";
+const comprehensionQuestion = "Comprehension check: Remember the stars you made from the machines? Which machine made these stars? Click on the correct machine.";
 const smallExperimentQuestion = "Now there is a new slot on the right. The elf boss wants an extra big star for his baby. Which slot will you use?";
 
 let machineLayout = '';
@@ -1186,7 +1186,7 @@ function displayHatsExploration() {
   remainingStars = 2; // allow 2 hats to be dropped
   renderMachines();
   document.getElementById("instruction-text").innerText =
-    "Now you are in a hat factory. This factory makes big hats and small hats. You have two hats to try out - drop them into any machine you like and see what they do! But... only one of the machines is really good at changing hat sizes. Can you figure out which one?";
+    "Now you are in a hat factory. This factory makes big hats and small hats. You have two hats to try out - click and drop them into any machine slot you like and see what they do! But... only one of the machines is really good at changing hat sizes. Can you figure out which one?";
 
   const playingText = document.getElementById("playing-text");
   playingText.style.display = "block";
@@ -1318,7 +1318,7 @@ function displayBrightnessExploration() {
   remainingStars = 2; // allow 2 lightbulbs to be dropped
   renderMachines();
   document.getElementById("instruction-text").innerText =
-    "Now you are in a lightbulb factory. This factory makes bright and dark lightbulbs. You have two lightbulbs to try out - drop them into any machine you like and see what they do! But... only one of the machines is really good at changing how bright the lightbulbs are. Can you figure out which one?";
+    "Now you are in a lightbulb factory. This factory makes bright and dark lightbulbs. You have two lightbulbs to try out - click and drop them into any machine slot you like and see what they do! But... only one of the machines is really good at changing how bright the lightbulbs are. Can you figure out which one?";
 
   const playingText = document.getElementById("playing-text");
   playingText.style.display = "block";
@@ -1650,28 +1650,28 @@ function saveCSV() {
     body: JSON.stringify({ participantID: prolificId, data: csvContent })
   })
   .then(response => !response.ok ? response.text().then(text => { throw new Error(text) }) : response.json())
-  .then(() => alert("Data saved successfully!"))
+  .then(() => alert("Data saved successfully! Your completion code is C1MQV7YS (please copy paste)."))
   .catch(error => {
     console.error('Error saving data:', error.message);
     alert("Error saving data: " + error.message);
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const quitBtn = document.getElementById('quit-button');
-  // hide initially
-  quitBtn.style.display = 'none';
+// document.addEventListener('DOMContentLoaded', () => {
+//   const quitBtn = document.getElementById('quit-button');
+//   // hide initially
+//   quitBtn.style.display = 'none';
 
-  // wire up click → save + jump to thank-you
-  quitBtn.addEventListener('click', () => {
-    saveCSV();
-    showScreen('thank-you');
-  });
+//   // wire up click → save + jump to thank-you
+//   quitBtn.addEventListener('click', () => {
+//     saveCSV();
+//     showScreen('thank-you');
+//   });
 
-  // wrap showScreen to toggle quitBtn only on the "experiment" screen
-  const _origShow = window.showScreen;
-  window.showScreen = function(screenId) {
-    _origShow(screenId);
-    quitBtn.style.display = (screenId === 'experiment') ? 'block' : 'none';
-  };
-});
+//   // wrap showScreen to toggle quitBtn only on the "experiment" screen
+//   const _origShow = window.showScreen;
+//   window.showScreen = function(screenId) {
+//     _origShow(screenId);
+//     quitBtn.style.display = (screenId === 'experiment') ? 'block' : 'none';
+//   };
+// });

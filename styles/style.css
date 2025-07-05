@@ -590,7 +590,7 @@ input, .form-container button {
     background: none;
 }
 
-.quit-button {
+/* .quit-button {
     position: fixed;
     bottom: 30px;
     right: 20px;
@@ -606,4 +606,4 @@ input, .form-container button {
 .quit-button:hover {
     background-color: #bab8b8;
     border-color: #999;
-}
+} */
